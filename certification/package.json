@@ -1,9 +1,9 @@
 {
   "name": "certification",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "sucrase-node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -11,5 +11,10 @@
   "license": "ISC",
   "dependencies": {
     "kafkajs": "^1.15.0"
-  }
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7",
+    "sucrase": "^3.18.1"
+  },
+  "description": ""
 }

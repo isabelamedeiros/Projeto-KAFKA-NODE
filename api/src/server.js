@@ -1,6 +1,6 @@
 import express from 'express';
 import { Kafka } from 'kafkajs';
-import routes from '../routers';
+import routes from './routers';
 
 const app = express();
 
@@ -10,7 +10,11 @@ const app = express();
 
 const kafka = new Kafka({
     clientId: 'api',
-    brokers: ['kafka: 9092']
+    brokers: ['localhost: 9092'],
+    retry: { 
+        initialRetryTime: 100,
+        retries: 8
+    }
 });
 
 const producer = kafka.producer()
@@ -30,10 +34,10 @@ app.use((req, res, next) => {
 app.use(routes);
 
 async function run(){
+    await producer.connect()
     app.listen(3333);
 }
 
 run().catch(console.error)
 
-// const producer = kafka.producer();
 
